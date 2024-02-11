@@ -1,3 +1,4 @@
 pymysql>=1.0.1
 mysql-replication>=1.0.2
 blinker
+environs>=10.0.0
