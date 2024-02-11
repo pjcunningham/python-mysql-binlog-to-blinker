@@ -1,11 +1,11 @@
 # coding=utf-8
+__author__ = 'Tarzan'
+
 import logging
-
 from pymysqlreplication import row_event
-
 from mysqlbinlog2blinker import signals
 
-__author__ = 'Tarzan'
+
 _logger = logging.getLogger(__name__)
 
 
