@@ -5,6 +5,7 @@ __author__ = 'tarzan'
 import logging
 import mysqlbinlog2blinker
 from mysqlbinlog2blinker import signals
+from environs import Env
 
 
 def setup_logging(level=None):
@@ -55,13 +56,15 @@ def on_rows_updated(table, rows, meta):
 
 
 def main():
-    mysqlbinlog2blinker.start_replication(
-        {
-            'host': 'localhost',
-            'user': 'root',
-            'port': 3306,
-        },
-    )
+    env = Env()
+    env.read_env()
+    mysql_settings = {
+        'host': env.str('HOST'),
+        'port': env.int('PORT'),
+        'user': env.str('USER'),
+        'password': env.str('PASSWORD'),
+    }
+    mysqlbinlog2blinker.start_replication(mysql_settings)
 
 
 if __name__ == '__main__':
