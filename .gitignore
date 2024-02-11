@@ -1,4 +1,5 @@
 .venv/
+.env
 
 ### Manually added
 *.binlog.pos
