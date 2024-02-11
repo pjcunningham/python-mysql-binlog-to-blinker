@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+__author__ = 'tarzan'
+
+
 import logging
-import pprint
 import mysqlbinlog2blinker
 from mysqlbinlog2blinker import signals
 
@@ -19,10 +20,20 @@ def setup_logging(level=None):
     if level:
         logging.root.setLevel(level)
 
+
 setup_logging(logging.INFO)
 
-__author__ = 'tarzan'
+
 _logger = logging.getLogger(__name__)
+
+
+@signals.on_rows_inserted
+def on_rows_inserted(table, rows, meta):
+    print('ROWS INSERTED')
+    print(table)
+    print(meta)
+    for row in rows:
+        print(row)
 
 
 @signals.on_rows_updated
@@ -30,7 +41,17 @@ def on_rows_updated(table, rows, meta):
     print('ROWS UPDATED')
     print(table)
     print(meta)
-    print(rows)
+    for row in rows:
+        print(row)
+
+
+@signals.on_rows_deleted
+def on_rows_updated(table, rows, meta):
+    print('ROWS DELETED')
+    print(table)
+    print(meta)
+    for row in rows:
+        print(row)
 
 
 def main():
