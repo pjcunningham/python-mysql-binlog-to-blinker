@@ -7,7 +7,7 @@ There are 3 kinds of signal:
 
 Will be sent after each event come to notify current binlog's position.
 
-    def subscriber((log_file, log_pos):
+    def subscriber((log_file, log_pos)):
         pass
 
 **Binlog signal**
@@ -43,6 +43,7 @@ binlog_position_signal = _signals.signal(
     'binlog_position'
 )
 """:type: blinker.NamedSignal"""
+on_binlog_position = binlog_position_signal.connect
 
 # fired on each RowsEvent come
 # def subscriber(event, stream)
